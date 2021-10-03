@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-
 import 'package:shopping_list/src/models/shopping/shopping_list.dart';
 import 'package:shopping_list/src/state/lists_provider.dart';
 import 'package:shopping_list/src/state/user_provider.dart';
@@ -30,7 +29,8 @@ class _HomePageState extends State<HomePage> {
       },
     );
     if (res.statusCode == 200) {
-      ListResponse listRes = ListResponse.fromJson(convert.jsonDecode(res.body));
+      ListResponse listRes =
+          ListResponse.fromJson(convert.jsonDecode(res.body));
       context.read<ListResponseProvider>().setResponse(listRes);
       return listRes;
     } else {
@@ -58,8 +58,13 @@ class _HomePageState extends State<HomePage> {
             return ListView(
               children: List.generate(
                   shoppingLists.length,
-                  (index) => ListTile(
+                  (index) => Card(
+                      elevation: 6,
+                      margin: const EdgeInsets.all(10),
+                      child: ListTile(
                         title: Text(shoppingLists[index].shop),
+                        subtitle:
+                            Text("${shoppingLists[index].items.length} Items"),
                         onTap: () {
                           Navigator.push(
                               context,
@@ -67,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                                   builder: (context) =>
                                       DetailList(listIndex: index)));
                         },
-                      )),
+                      ))),
             );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

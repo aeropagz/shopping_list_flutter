@@ -16,8 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final userController = TextEditingController();
-  final passwordController = TextEditingController();
+  final TextEditingController userController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final Uri loginUrl = Uri.parse("https://simplelist.de:8080/user/login");
 
   @override
@@ -50,15 +50,16 @@ class _LoginPageState extends State<LoginPage> {
         title: const Text("simplelist"),
         backgroundColor: Colors.black,
       ),
+      resizeToAvoidBottomInset: false,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(top: 60.0),
+            padding: const EdgeInsets.only(top: 10.0),
             child: Center(
               child: SizedBox(
-                  width: 200,
-                  height: 150,
+                  width: 250,
+                  height: 250,
                   child: Image.asset('lib/src/assets/check-list3.png')),
             ),
           ),
@@ -66,20 +67,44 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TextField(
               controller: userController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
                   labelText: 'Email',
-                  hintText: 'Enter valid email id as abc@gmail.com'),
+                  hintText: 'Enter valid email id.',
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).focusColor,
+                      width: 2,
+                    ),
+                  ),
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                  )),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(
-                left: 15.0, right: 15.0, top: 15, bottom: 0),
+                left: 15.0, right: 15.0, top: 15.0, bottom: 15.0),
             child: TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Password'),
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: 'Password',
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Theme.of(context).focusColor,
+                      width: 2,
+                    ),
+                  ),
+                  labelStyle: const TextStyle(
+                    color: Colors.black,
+                  )),
             ),
           ),
           ElevatedButton(
@@ -95,11 +120,12 @@ class _LoginPageState extends State<LoginPage> {
             style: ElevatedButton.styleFrom(
               primary: Theme.of(context).primaryColor,
             ),
-            child: const Text(
+            child: Text(
               'Login',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              style: Theme.of(context).textTheme.button,
             ),
           ),
+          const Padding(padding: EdgeInsets.only(top: 30.0)),
           const Text('New User? Create Account')
         ],
       ),
