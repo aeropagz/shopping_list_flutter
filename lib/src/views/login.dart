@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:shopping_list/src/state/user_provider.dart';
 import 'dart:convert' as convert;
 
+import 'package:shopping_list/src/state/user_provider.dart';
 import 'home_page.dart';
 import '../models/user/user.dart';
 
