@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:shopping_list/src/models/shopping/shopping_list.dart';
 import 'package:shopping_list/src/state/lists_provider.dart';
 
+import 'add_item_dialog.dart';
+
 class DetailList extends StatelessWidget {
   final int listIndex;
 
@@ -32,8 +34,14 @@ class DetailList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {  },
-        child: Icon(Icons.add),
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AddItemDialog(list: currentList);
+              });
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
